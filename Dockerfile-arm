@@ -1,0 +1,33 @@
+# build: docker build -t generalmeow/mongodb:<TAG>-arm
+# run: docker run -d -p 27017:27017 --name mongodb -v <>:/data/db generalmeow/mongodb:<TAG>-arm
+FROM hypriot/rpi-alpine-scratch
+RUN apk update && \
+apk upgrade && \
+apk add bash && \
+rm -rf /var/cache/apk
+MAINTAINER Paul Hoang 2017-01-16
+RUN ["mkdir", "-p", "/data/db"]
+RUN ["mkdir", "-p", "/home/files"]
+RUN ["mkdir", "-p", "/home/mongodb"]
+VOLUME /data/db
+COPY ./files/mongodb-ubuntu/mongodb-ubuntu-arm-3.4.1.tar.gzaa /home/files
+COPY ./files/mongodb-ubuntu/mongodb-ubuntu-arm-3.4.1.tar.gzab /home/files
+COPY ./files/mongodb-ubuntu/mongodb-ubuntu-3.4.1.tar.gzad /home/files
+COPY ./files/mongodb-ubuntu/mongodb-ubuntu-arm-3.4.1.tar.gzac /home/files
+COPY ./files/mongodb-ubuntu/mongodb-ubuntu-arm-3.4.1.tar.gzae /home/files
+COPY ./files/mongodb-ubuntu/mongodb-ubuntu-arm-3.4.1.tar.gzaf /home/files
+COPY ./files/mongodb-ubuntu/mongodb-ubuntu-arm-3.4.1.tar.gzag /home/files
+COPY ./files/mongodb-ubuntu/mongodb-ubuntu-arm-3.4.1.tar.gzah /home/files
+COPY ./files/mongodb-ubuntu/mongodb-ubuntu-arm-3.4.1.tar.gzai /home/files
+COPY ./files/mongodb-ubuntu/mongodb-ubuntu-arm-3.4.1.tar.gzaj /home/files
+COPY ./files/mongodb-ubuntu/mongodb-ubuntu-arm-3.4.1.tar.gzak /home/files
+COPY ./files/mongodb-ubuntu/mongodb-ubuntu-arm-3.4.1.tar.gzal /home/files
+COPY ./files/mongodb-ubuntu/mongodb-ubuntu-arm-3.4.1.tar.gzam /home/files
+COPY ./files/mongodb-ubuntu/mongodb-ubuntu-arm-3.4.1.tar.gzan /home/files
+ADD  ./files/mongodb-ubuntu/catfiles.sh /home/files
+WORKDIR /home/files
+#RUN ["cat", "/home/files/mongodb-ubuntu-arm-3.4.1*", ">", "/home/files/mongodb.tar.gz"]
+RUN ["/home/files/catfiles.sh"]
+RUN ["tar", "-zxvf", "mongodb.tar.gz", "-C", "/home/mongodb"]
+RUN ["rm", "-rf", "/home/files"]
+ENTRYPOINT ["/home/mongodb/mongodb-linux-aarch64-ubuntu1604-3.4.1/bin/mongod"]
