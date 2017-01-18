@@ -10,20 +10,8 @@ RUN ["mkdir", "-p", "/data/db"]
 RUN ["mkdir", "-p", "/home/files"]
 RUN ["mkdir", "-p", "/home/mongodb"]
 VOLUME /data/db
-COPY ./files/mongodb-ubuntu/mongodb-ubuntu-3.4.1.tar.gzaa /home/files
-COPY ./files/mongodb-ubuntu/mongodb-ubuntu-3.4.1.tar.gzab /home/files
-COPY ./files/mongodb-ubuntu/mongodb-ubuntu-3.4.1.tar.gzac /home/files
-COPY ./files/mongodb-ubuntu/mongodb-ubuntu-3.4.1.tar.gzad /home/files
-COPY ./files/mongodb-ubuntu/mongodb-ubuntu-3.4.1.tar.gzae /home/files
-COPY ./files/mongodb-ubuntu/mongodb-ubuntu-3.4.1.tar.gzaf /home/files
-COPY ./files/mongodb-ubuntu/mongodb-ubuntu-3.4.1.tar.gzag /home/files
-COPY ./files/mongodb-ubuntu/mongodb-ubuntu-3.4.1.tar.gzah /home/files
-COPY ./files/mongodb-ubuntu/mongodb-ubuntu-3.4.1.tar.gzai /home/files
-COPY ./files/mongodb-ubuntu/mongodb-ubuntu-3.4.1.tar.gzaj /home/files
-COPY ./files/mongodb-ubuntu/mongodb-ubuntu-3.4.1.tar.gzak /home/files
-ADD  ./files/mongodb-ubuntu/catfiles.sh /home/files
+COPY ./files/mongodb-ubuntu /home/files
 WORKDIR /home/files
-#RUN ["cat", "/home/files/mongodb-ubuntu-3.4.1*", ">", "/home/files/mongodb.tar.gz"]
 RUN ["/home/files/catfiles.sh"]
 RUN ["tar", "-zxvf", "mongodb.tar.gz", "-C", "/home/mongodb"]
 RUN ["rm", "-rf", "/home/files"]
