@@ -3,16 +3,10 @@
 FROM hypriot/rpi-alpine-scratch
 RUN apk update && \
 apk upgrade && \
-apk add bash && \
-rm -rf /var/cache/apk
+apk add bash
+#rm -rf /var/cache/apk
 MAINTAINER Paul Hoang 2017-01-16
 RUN ["mkdir", "-p", "/data/db"]
 RUN ["mkdir", "-p", "/home/files"]
 RUN ["mkdir", "-p", "/home/mongodb"]
 VOLUME /data/db
-COPY ./files/mongodb-ubuntu-arm /home/files
-WORKDIR /home/files
-RUN ["/home/files/catfiles.sh"]
-RUN ["tar", "-zxvf", "mongodb.tar.gz", "-C", "/home/mongodb"]
-RUN ["rm", "-rf", "/home/files"]
-ENTRYPOINT ["/home/mongodb/mongodb-linux-aarch64-ubuntu1604-3.4.1/bin/mongod"]
