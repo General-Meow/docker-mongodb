@@ -1,14 +1,10 @@
 # build: docker build -t generalmeow/mongodb:<TAG>-arm
 # run: docker run -d -p 27017:27017 --name mongodb -v <>:/data/db generalmeow/mongodb:<TAG>-arm
-FROM hypriot/rpi-alpine-scratch
-RUN apk update && \
-apk upgrade && \
-apk add bash
-#rm -rf /var/cache/apk
+FROM resin/rpi-raspbian
+RUN ["apt-get", "update"]
+RUN ["apt-get", "install", "mongodb"]
+EXPOSE 27017
 MAINTAINER Paul Hoang 2017-01-16
 RUN ["mkdir", "-p", "/data/db"]
-RUN ["mkdir", "-p", "/home/files"]
-RUN ["mkdir", "-p", "/home/mongodb"]
-COPY ["files/mongo-arm-extract/mongodb-linux-aarch64-ubuntu1604-3.4.1", "/home/mongodb"]
 VOLUME /data/db
-ENTRYPOINT ["/home/mongodb/mongodb-linux-aarch64-ubuntu1604-3.4.1/bin/mongod"]
+ENTRYPOINT ["mongod"]

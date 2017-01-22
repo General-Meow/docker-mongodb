@@ -15,4 +15,4 @@ WORKDIR /home/files
 RUN ["/home/files/catfiles.sh"]
 RUN ["tar", "-zxvf", "mongodb.tar.gz", "-C", "/home/mongodb"]
 RUN ["rm", "-rf", "/home/files"]
-ENTRYPOINT ["/home/mongodb/mongodb-linux-x86_64-ubuntu1604-3.4.1/bin/mongod"]
+ENTRYPOINT ["/home/mongodb/bin/mongod"]
