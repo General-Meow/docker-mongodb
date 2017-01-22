@@ -9,4 +9,6 @@ MAINTAINER Paul Hoang 2017-01-16
 RUN ["mkdir", "-p", "/data/db"]
 RUN ["mkdir", "-p", "/home/files"]
 RUN ["mkdir", "-p", "/home/mongodb"]
+COPY ["files/mongo-arm-extract/mongodb-linux-aarch64-ubuntu1604-3.4.1", "/home/mongodb"]
 VOLUME /data/db
+ENTRYPOINT ["/home/mongodb/mongodb-linux-aarch64-ubuntu1604-3.4.1/bin/mongod"]
