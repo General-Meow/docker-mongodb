@@ -8,4 +8,4 @@ EXPOSE 28017
 MAINTAINER Paul Hoang 2017-01-16
 RUN ["mkdir", "-p", "/data/db"]
 VOLUME /data/db
-ENTRYPOINT ["mongod"]
+ENTRYPOINT ["mongod", "--config", "/etc/mongodb.conf"]
